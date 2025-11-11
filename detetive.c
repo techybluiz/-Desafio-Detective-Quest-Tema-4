@@ -5,9 +5,6 @@
 #define TAM 50
 #define HASH_SIZE 10
 
-// =========================
-// ESTRUTURA 1 - ÁRVORE BINÁRIA (MAPA DA MANSÃO)
-// =========================
 typedef struct Comodo {
     char nome[TAM];
     struct Comodo *esquerda, *direita;
@@ -21,7 +18,6 @@ Comodo* novoComodo(char *nome) {
     return novo;
 }
 
-// Inserir cômodo (ordem alfabética)
 Comodo* inserirComodo(Comodo *raiz, char *nome) {
     if (raiz == NULL) return novoComodo(nome);
     if (strcmp(nome, raiz->nome) < 0)
@@ -31,7 +27,6 @@ Comodo* inserirComodo(Comodo *raiz, char *nome) {
     return raiz;
 }
 
-// Exibir mapa (in-ordem)
 void exibirMapa(Comodo *raiz) {
     if (raiz != NULL) {
         exibirMapa(raiz->esquerda);
@@ -40,15 +35,12 @@ void exibirMapa(Comodo *raiz) {
     }
 }
 
-// =========================
-// ESTRUTURA 2 - ÁRVORE DE BUSCA BINÁRIA (PISTAS)
-// =========================
 typedef struct Pista {
     char nome[TAM];
     struct Pista *esq, *dir;
 } Pista;
 
-// Cria nova pista
+
 Pista* novaPista(char *nome) {
     Pista *nova = (Pista*) malloc(sizeof(Pista));
     strcpy(nova->nome, nome);
@@ -56,7 +48,6 @@ Pista* novaPista(char *nome) {
     return nova;
 }
 
-// Inserir pista (ordem alfabética)
 Pista* inserirPista(Pista *raiz, char *nome) {
     if (raiz == NULL) return novaPista(nome);
     if (strcmp(nome, raiz->nome) < 0)
@@ -75,9 +66,6 @@ void exibirPistas(Pista *raiz) {
     }
 }
 
-// =========================
-// ESTRUTURA 3 - TABELA HASH (PISTA → SUSPEITO)
-// =========================
 typedef struct Item {
     char pista[TAM];
     char suspeito[TAM];
@@ -86,7 +74,6 @@ typedef struct Item {
 
 Item* tabela[HASH_SIZE];
 
-// Função hash simples
 int hash(char *str) {
     int soma = 0;
     for (int i = 0; str[i] != '\0'; i++)
@@ -94,7 +81,6 @@ int hash(char *str) {
     return soma % HASH_SIZE;
 }
 
-// Inserir na hash
 void inserirHash(char *pista, char *suspeito) {
     int h = hash(pista);
     Item *novo = (Item*) malloc(sizeof(Item));
@@ -127,11 +113,7 @@ void exibirHash() {
     }
 }
 
-// =========================
-// FUNÇÃO PRINCIPAL
-// =========================
 int main() {
-    // Árvore binária - Mapa da mansão
     Comodo *mapa = NULL;
     mapa = inserirComodo(mapa, "Sala");
     mapa = inserirComodo(mapa, "Biblioteca");
@@ -167,6 +149,6 @@ int main() {
     printf("Carta → %s\n", buscarSuspeito("Carta"));
     printf("Luvas → %s\n", buscarSuspeito("Luvas"));
 
-    printf("\nFim da simulação. O detetive agora pode deduzir o culpado!\n");
+    printf("\nFim da simulação. O detetive agora pode dizer o culpado!\n");
     return 0;
 }
