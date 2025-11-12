@@ -1,4 +1,4 @@
-# 🕵️‍♀️ Detective Quest — Estruturas de Dados em C
+# Detective Quest — Estruturas de Dados em C
 
 ## 🧩 Objetivos do Projeto
 
